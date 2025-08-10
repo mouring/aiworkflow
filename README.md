@@ -8,6 +8,9 @@ An attempt will be made to give basic description of what each node does, any Cu
 
 Lastly, I will try to be platform agnostic as possible. However, I run on a Mac and therefore FP8 and FP4 workflows are closed to me at this point.  So don't expect anything discussion of that nature.  For workflows that use FP8 I will switch over to FP16 GGUF versions.  This may not be optimal for other platforms, and if at some point I decide on buying NVIDIA based hardware I will update the workflows with what feels to be optimial for them.
 
-## Workflow Discussions
+## SD Workflow Discussions
 
-* [Basic SD Workflow](SD-Workflows-Basic.md)
+* [Basic Workflow](SD-Workflows-Basic.md)
+* Lora Workflow
+* IP Adaptor Plus Workflow
+* ControlNet Workflow

@@ -25,7 +25,6 @@ After selecting your model in the "Load Checkpoint" you need to provide positive
 Most SD based CLIP loaders are keyword based and not fully natural language. Through trial and error I found the most effective way of formating for the most control is via sections.
 
 ## Example
-
 **Positive:**
 ```
 ## Model Specials
@@ -90,16 +89,39 @@ text, worst quality, low quality, jpeg artifacts, ugly
 
 ![Alt text](images/Basic-SD-Workflow-Output1.png "Basic SD Workflow Output 1")
 
-
 Notes:
 
-1. Only apply Negative prompts when required to fix specific issues.  As they can have unexpected or bad affects on the image.  It is generally better to direct via positive prompts.  Like if you wish a character's legs to always be together when sitting use "legs together" in the Pose section. You can get example negative prompts by looking at the Civitai.com or other workflow sites.
+1. Only apply Negative prompts when required to fix specific issues.  As they can have unexpected or bad affects on the image.  It is better to direct via positive prompts.  Like if you wish a character's legs to always be together when sitting use "legs together" in the Pose section. You can get example negative prompts by looking at the Civitai.com or other workflow sites.
 
 2. You will notice the prompt wasn't fully followed and the petticoats were not applied.  You can attempt to fix this by changing the CFG or by adding a weight value like: (white laced petticoat:1.2)
 
 3. There is no silver bullet.  You may adjust one thing and some other aspect be less valued by the CLIP encoder.  Other things that will change how the prompt is adhering is the Sampler used, Empty Latent size, and sead.
 
+## Postive Prompt Breakdown 
+Let me discuss the reason why the postive prompt above looks radicially different than what most people recommend for SD based checkpoints.
 
+First off consider "BREAK" to be a buffer seperator for context. This helps with stopping describe bleed over between characters, clothing, etc.  The above example may be overkill, but is useful to isolate and contain descriptions.
 
+Second, I break things into smaller sections that can be re-used (and examples of that will be shown later).  Those section broadly are:
 
+* Model Specials -- These are keywords to improve and guide which images to use within the checkpoint.
+* Scene -- The general description around the object or character.  This is useful if you need to isolate a character for prompt testing before placing them within a scene.
+* Pose -- The general description of the pose of the character (sitting, standing, etc). Note *DO NOT* use this when using a Controlnet (more to be discussed later)
+* Gender, Hair, Face, Raw Body, Upper Body, Lower Body, Hands, Legs -- These are used to isolate and control specific area.  If you are doing layer clothing you may want to place each in their own section.
 
+All of this is in service of trying to generate a consistent, reusable prompt.  This isn't foolproof.  It is just a design mechanism to help keep prompt creep to a minimal. 
+
+## Gleaming keywords
+There are different ways to peer into a generated image to get some keywords out that may help in crafting the above postive prompt.
+
+### WD14 Trigger
+One can use [WD14 Tigger](https://github.com/pythongosssss/ComfyUI-WD14-Tagger) custom node to do this.  You can install this using the instructions on the Github page or if you have ComfyUI Manager install you can search for it in the Custom Nodes Manager.
+
+When installed and ComfyUI has been restarted you can add in WD14 Trigger node and wire it to the VAE Decode node as such.
+
+![Alt text](images/Basic-SD-Workflow-WD14Trigger.png "WD14 Trigger")
+
+After you run the workflow it will shows tags. Sometimes these are useful for getting more stable results.  However keep in mind that if you change checkpoints these keywords may change as each checkpoint has different training data.
+
+## KSampler previewing
+By default ComfyUI doesn't show step previews.  Enabling this feature can be useful as you will get an idea of the final image based before the generation is completed which means you can abort a generation if it is wildly wrong.  To enable this go to the Gear (Settings) Server-Config and down to Preview section and change it from none to auto.
