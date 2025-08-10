@@ -11,6 +11,7 @@ Lastly, I will try to be platform agnostic as possible. However, I run on a Mac 
 ## SD Workflow Discussions
 
 * [Basic Workflow](SD-Workflows-Basic.md)
+* [ControlNet Workflow](SD-Workflows-ControlNet.md)
 * Lora Workflow
 * IP Adaptor Plus Workflow
-* ControlNet Workflow
+
