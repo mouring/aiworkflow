@@ -22,6 +22,10 @@ Lastly, I will try to be platform agnostic as possible. However, I run on a Mac 
 * Multi-Character Scheduling Workflow
 * Multi-Generation Layering Workflow
 
+## Qwen Image/Edit Workflow Discussions
+* [Basic Workflow](Qwen/Qwen-Workflows-Basic.md)
+* [Edit Workflow](Qwen/Qwen-Edit-Workflows-Basic.md)
+
 ## Hunyuan3D Workflow Discussions
 
 * Basic Workflow
